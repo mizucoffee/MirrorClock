@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TextViewPlusFont">
+        <attr name="customFont" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="MarqueeView">
+        <attr name="text" format="string" />
+        <attr name="textColor" format="color" />
+        <attr name="backGround" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="repeatLimit" format="integer" />
+        <attr name="textMoveSpeed" format="integer" />
+    </declare-styleable>
+</resources>

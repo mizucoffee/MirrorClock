@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="net.mizucofee.mirrorclock.MainActivity"
+    android:background="@android:color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <net.mizucofee.mirrorclock.MirroredTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="18dp"
+                android:paddingRight="18dp"
+                android:paddingTop="18dp"
+                android:id="@+id/week"
+                android:textColor="#2a6aff"
+                android:textSize="32sp"
+                app:customFont="14seg.ttf" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <net.mizucofee.mirrorclock.MirroredTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/date"
+                android:textColor="#2a6aff"
+                android:textSize="54sp"
+                app:customFont="14seg.ttf" />
+            </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="horizontal">
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <net.mizucofee.mirrorclock.MirroredTextView
+            android:id="@+id/sec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="18dp"
+            android:paddingTop="18dp"
+            android:text="00"
+            android:textColor="#2a6aff"
+            android:textSize="70sp"
+            app:customFont="7seg.ttf" />
+
+
+        <net.mizucofee.mirrorclock.MirroredTextView
+            android:id="@+id/min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="18dp"
+            android:paddingTop="18dp"
+            android:textColor="#2a6aff"
+            android:textSize="100sp"
+            app:customFont="7seg.ttf" />
+
+        <net.mizucofee.mirrorclock.MirroredTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="18dp"
+            android:id="@+id/coron"
+            android:paddingTop="18dp"
+            android:textColor="#2a6aff"
+            android:textSize="100sp"
+            app:customFont="7seg.ttf" />
+
+        <net.mizucofee.mirrorclock.MirroredTextView
+            android:id="@+id/hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="18dp"
+            android:paddingTop="18dp"
+            android:textColor="#2a6aff"
+            android:textSize="100sp"
+            app:customFont="7seg.ttf" />
+
+
+    </LinearLayout>
+
+    <net.mizucofee.mirrorclock.MirroredTextView
+        android:id="@+id/marquee"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:lines="1"
+        android:paddingTop="18dp"
+        android:textColor="#2a6aff"
+        android:textSize="54sp"
+        app:customFont="hibiya.ttf" />
+
+</LinearLayout>
