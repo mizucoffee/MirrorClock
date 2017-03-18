@@ -1,9 +1,11 @@
 package net.mizucofee.mirrorclock;
 
 import android.content.pm.ActivityInfo;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.marquee)
     MirroredFontTextView marqueeTv;
     private Animation animation;
+    private boolean isFirst = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,19 +81,23 @@ public class MainActivity extends AppCompatActivity {
     int now = 0;
 
     private void animateText(){
+        WindowManager wm = getWindowManager();
+        Point size = new Point();
+        wm.getDefaultDisplay().getSize(size);
+
         animation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, -1f,
-                Animation.RELATIVE_TO_SELF,	+1f,
+                Animation.ABSOLUTE, size.x,
                 Animation.RELATIVE_TO_SELF, 0f,
                 Animation.RELATIVE_TO_SELF, 0f
         );
 
         animation.setInterpolator(new LinearInterpolator());
 
-        animation.setDuration(news.get(now).length() * 500);
+        animation.setDuration(news.get(now).length() * 300);
+        marqueeTv.setLayoutParams(new LinearLayout.LayoutParams((int)(getResources().getDisplayMetrics().density * 36 * news.get(now).length()), LinearLayout.LayoutParams.WRAP_CONTENT));
 
         marqueeTv.setText(news.get(now));
-        marqueeTv.setLayoutParams(new LinearLayout.LayoutParams((int)(getResources().getDisplayMetrics().density * 54 * news.get(now).length()), LinearLayout.LayoutParams.WRAP_CONTENT));
 
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -100,9 +107,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                if(isFirst){
+                    isFirst = false;
+                    animateText();
+                    return;
+                }
+                isFirst = true;
                 now++;
                 if(news.size() <= now) {
                     now = 0;
+                    marqueeTv.setVisibility(View.INVISIBLE);
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -111,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                             new Handler(getMainLooper()).post(new Runnable() {
                                 @Override
                                 public void run() {
+                                    marqueeTv.setVisibility(View.VISIBLE);
                                     animateText();
                                 }
                             });
