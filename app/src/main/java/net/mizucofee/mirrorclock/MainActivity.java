@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
+                            getNews();
                             while (!flag){}
                             new Handler(getMainLooper()).post(new Runnable() {
                                 @Override
@@ -155,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String get = null;
                 try {
                     URLConnection connection = new URL("https://headlines.yahoo.co.jp/rss/all-dom.xml").openConnection();
                     DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
@@ -170,7 +170,11 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0;localNodeList.getLength() != i;i++){
                         Element elementItem = (Element) localNodeList.item(i);
                         Element elementItemName = (Element) elementItem.getElementsByTagName("title").item(0);
-                        news.add( elementItemName.getFirstChild().getNodeValue());
+                        String n = elementItemName.getFirstChild().getNodeValue();
+                        String name = n.substring(n.lastIndexOf("（"));
+                        name = name.substring(1,name.length() - 1);
+                        n = n.substring(0,n.lastIndexOf("（"));
+                        news.add("◇" + name + "◇" + n);
                     }
                     flag = true;
                 } catch (ParserConfigurationException e) {
