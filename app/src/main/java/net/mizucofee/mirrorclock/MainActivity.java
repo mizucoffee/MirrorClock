@@ -34,13 +34,20 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> news = new ArrayList<>();
 
-    @BindView(R.id.week) MirroredTextView weekTv;
-    @BindView(R.id.date) MirroredTextView dateTv;
-    @BindView(R.id.hour) MirroredTextView hourTv;
-    @BindView(R.id.min) MirroredTextView minTv;
-    @BindView(R.id.sec) MirroredTextView secTv;
-    @BindView(R.id.coron) MirroredTextView coronTv;
-    @BindView(R.id.marquee) MirroredTextView marqueeTv;
+    @BindView(R.id.week)
+    MirroredFontTextView weekTv;
+    @BindView(R.id.date)
+    MirroredFontTextView dateTv;
+    @BindView(R.id.hour)
+    MirroredFontTextView hourTv;
+    @BindView(R.id.min)
+    MirroredFontTextView minTv;
+    @BindView(R.id.sec)
+    MirroredFontTextView secTv;
+    @BindView(R.id.coron)
+    MirroredFontTextView coronTv;
+    @BindView(R.id.marquee)
+    MirroredFontTextView marqueeTv;
     private Animation animation;
 
     @Override
@@ -158,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     URLConnection connection = new URL("https://headlines.yahoo.co.jp/rss/all-dom.xml").openConnection();
+                    connection.setReadTimeout(10000);
                     DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
                     DocumentBuilder builder = dbfactory.newDocumentBuilder(); // DocumentBuilderインスタンス
 
@@ -177,12 +185,9 @@ public class MainActivity extends AppCompatActivity {
                         news.add("◇" + name + "◇" + n);
                     }
                     flag = true;
-                } catch (ParserConfigurationException e) {
+                } catch (ParserConfigurationException | SAXException | IOException e) {
                     e.printStackTrace();
-                } catch (SAXException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    flag = true;
                 }
             }
         }).start();
